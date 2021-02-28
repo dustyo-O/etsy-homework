@@ -17,8 +17,15 @@ export default function Listing({ items = [] }) {
         const price = Object.keys(STANDARD_CURRENCY).includes(item.currency_code) ?
           STANDARD_CURRENCY[item.currency_code] + item.price : item.price + ' ' + item.currency_code;
 
-        const level = item.quantity > 20 ? 'high' :
-          item.quantity > 10 ? 'medium' : 'low';
+        let level = 'low';
+
+        if (level > 10) {
+          level = 'medium';
+        }
+
+        if (level > 20) {
+          level = 'high';
+        }
 
         return (
           <div key={item.listing_id} className="item">
